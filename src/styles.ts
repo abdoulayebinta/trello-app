@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+type AddItemButtonProps = {
+  dark?: boolean;
+};
+
 export const AppContainer = styled.div`
   display: flex;
   align-items: flex-start;
