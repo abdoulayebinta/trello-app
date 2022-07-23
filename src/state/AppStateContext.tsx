@@ -1,5 +1,9 @@
 import { useContext, createContext, FC } from 'react';
 
+interface Props {
+  children: React.ReactNode;
+}
+
 type Task = {
   id: string;
   text: string;
@@ -44,7 +48,7 @@ const AppStateContext = createContext<AppStateContextProps>(
   {} as AppStateContextProps
 );
 
-export const AppStateProvider: FC = ({ children }) => {
+export const AppStateProvider: FC<Props> = ({ children }) => {
   const { lists } = appData;
 
   const getTasksByListId = (id: string) => {
@@ -56,4 +60,8 @@ export const AppStateProvider: FC = ({ children }) => {
       {children}
     </AppStateContext.Provider>
   );
+};
+
+export const useAppState = () => {
+  return useContext(AppStateContext);
 };
