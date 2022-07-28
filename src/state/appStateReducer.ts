@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { Action } from './actions';
 
 export type Task = {
@@ -22,7 +23,7 @@ export const appStateReducer = (
   switch (action.type) {
     case 'ADD_LIST': {
       draft.lists.push({
-        id: toString(Math.round(Math.random() * 1000)),
+        id: nanoid(),
         text: action.payload,
         tasks: [],
       });
