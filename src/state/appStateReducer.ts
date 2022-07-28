@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { findItemIndexById } from '../utils/arrayUtils';
+import { findItemIndexById, moveItem } from '../utils/arrayUtils';
 import { Action } from './actions';
 
 export type Task = {
