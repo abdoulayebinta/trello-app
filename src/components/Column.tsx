@@ -1,7 +1,7 @@
 import { ColumnContainer, ColumnTitle } from '../styles';
 import { Card } from './Card';
 import { AddNewItem } from './AddNewItem';
-import { useAppState } from '../state/AppStateContext';
+import { useAppState } from '../state/appStateContext';
 
 type ColumnProps = {
   title: string;
