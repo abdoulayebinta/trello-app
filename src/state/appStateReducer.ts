@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid';
+import { DragItem } from '../DragItem';
 import { findItemIndexById, moveItem } from '../utils/arrayUtils';
 import { Action } from './actions';
 
@@ -15,6 +16,7 @@ export type List = {
 
 export type AppState = {
   lists: List[];
+  draggedItem: DragItem | null;
 };
 
 export const appStateReducer = (
