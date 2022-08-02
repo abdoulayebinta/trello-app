@@ -1,22 +1,44 @@
+import { useRef } from 'react';
+import { useDrop } from 'react-dnd';
+import { throttle } from 'throttle-debounce-ts';
 import { ColumnContainer, ColumnTitle } from '../styles';
 import { Card } from './Card';
 import { AddNewItem } from './AddNewItem';
 import { useAppState } from '../state/appStateContext';
-import { addTask } from '../state/actions';
+import { addTask, moveList } from '../state/actions';
+import { useItemDrag } from '../utils/useItemDrag';
 
 type ColumnProps = {
-  title: string;
+  text: string;
   id: string;
 };
 
-export const Column = ({ title, id }: ColumnProps) => {
-  const { getTasksByListId, dispatch } = useAppState();
+export const Column = ({ text, id }: ColumnProps) => {
+  const { getTasksByListId, dispatch, draggedItem } = useAppState();
 
   const tasks = getTasksByListId(id);
+  const ref = useRef<HTMLDivElement>(null);
+  const { drag } = useItemDrag({ type: 'COLUMN', id, text });
+  const [, drop] = useDrop({
+    accept: 'COLUMN',
+    hover: throttle(200, () => {
+      if (!draggedItem) {
+        return;
+      }
+      if (draggedItem.type === 'COLUMN') {
+        if (draggedItem.id === id) {
+          return;
+        }
+        dispatch(moveList(draggedItem.id, id));
+      }
+    }),
+  });
+
+  drag(drop(ref));
 
   return (
-    <ColumnContainer>
-      <ColumnTitle>{title}</ColumnTitle>
+    <ColumnContainer ref={ref}>
+      <ColumnTitle>{text}</ColumnTitle>
       {tasks.map((task) => (
         <Card text={task.text} id={task.id} key={task.id} />
       ))}

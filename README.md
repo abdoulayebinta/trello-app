@@ -20,5 +20,6 @@ A simplified version of a Kanban board
 - nanoid: to generate unique identifiers _ids_
 - react-dnd: to implement drag and drop
 - react-dnd-html5-backend: to use React Drag and Drop with HTML5
+- throttle-debouce-ts: to avoid thriggering the hover event too frequently
 
 ## How to run this app on your local machine

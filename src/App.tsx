@@ -11,7 +11,7 @@ export const App = () => {
   return (
     <AppContainer>
       {lists.map((list) => (
-        <Column title={list.text} id={list.id} key={list.id} />
+        <Column text={list.text} id={list.id} key={list.id} />
       ))}
       <AddNewItem
         toggleButtonText="+ Add another list"
