@@ -4,6 +4,14 @@ type AddItemButtonProps = {
   dark?: boolean;
 };
 
+interface DragPreviewContainerProps {
+  isHidden?: boolean;
+}
+
+export const DragPreviewContainer = styled.div<DragPreviewContainerProps>`
+  opacity: ${(props) => (props.isHidden ? 0.3 : 1)};
+`;
+
 export const AppContainer = styled.div`
   display: flex;
   align-items: flex-start;
@@ -14,13 +22,13 @@ export const AppContainer = styled.div`
   padding: 20px;
 `;
 
-export const ColumnContainer = styled.div`
+export const ColumnContainer = styled(DragPreviewContainer)`
   width: 300px;
   min-height: 40px;
   margin-right: 20px;
   background-color: #ebecf0;
   border-radius: 3px;
-  padding: 8px;
+  padding: 8px 8px;
   flex-grow: 0;
 `;
 
@@ -29,7 +37,7 @@ export const ColumnTitle = styled.div`
   font-weight: bold;
 `;
 
-export const CardContainer = styled.div`
+export const CardContainer = styled(DragPreviewContainer)`
   max-width: 300px;
   border-radius: 3px;
   background-color: #fff;
